@@ -29,6 +29,8 @@ interface CollectionConfig {
   collections: Array<{
     name: string;
     bookFile: string;
+    funnel: 'religious' | 'secular';
+    language: string;
     description: string;
   }>;
 }
@@ -37,6 +39,8 @@ interface Chunk {
   id: string;
   text: string;
   bookName: string;
+  funnel: 'religious' | 'secular';
+  language: string;
   chunkIndex: number;
   startChar: number;
   endChar: number;
@@ -49,7 +53,7 @@ function loadCollections(): CollectionConfig {
   return JSON.parse(raw) as CollectionConfig;
 }
 
-function chunkText(text: string, bookName: string): Chunk[] {
+function chunkText(text: string, bookName: string, funnel: 'religious' | 'secular', language: string): Chunk[] {
   const chunkChars = CHUNK_SIZE * CHARS_PER_TOKEN;
   const overlapChars = CHUNK_OVERLAP * CHARS_PER_TOKEN;
   const chunks: Chunk[] = [];
@@ -62,6 +66,8 @@ function chunkText(text: string, bookName: string): Chunk[] {
       id: `${bookName}-chunk-${index}`,
       text: text.slice(start, end),
       bookName,
+      funnel,
+      language,
       chunkIndex: index,
       startChar: start,
       endChar: end,
@@ -136,6 +142,8 @@ async function upsertChunks(collectionName: string, chunks: Chunk[]): Promise<vo
           payload: {
             text: chunk.text,
             book: chunk.bookName,
+            funnel: chunk.funnel,
+            language: chunk.language,
             chunk_index: chunk.chunkIndex,
             start_char: chunk.startChar,
             end_char: chunk.endChar,
@@ -174,10 +182,10 @@ async function main(): Promise<void> {
       continue;
     }
 
-    console.log(`==> Indexing: ${collection.name} (${collection.bookFile})`);
+    console.log(`==> Indexing: ${collection.name} (${collection.bookFile}) [funnel=${collection.funnel}, lang=${collection.language}]`);
 
     const text = fs.readFileSync(bookPath, 'utf-8');
-    const chunks = chunkText(text, collection.name);
+    const chunks = chunkText(text, collection.name, collection.funnel, collection.language);
     console.log(`    ${chunks.length} chunks generated`);
 
     await createCollection(collection.name);

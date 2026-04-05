@@ -1,24 +1,60 @@
 {
   "collections": [
     {
-      "name": "book-1",
-      "bookFile": "book-1.txt",
-      "description": "First publication — primary content collection"
+      "name": "trilogy-vol1-en",
+      "bookFile": "book-1-en.txt",
+      "funnel": "religious",
+      "language": "en",
+      "description": "Trilogy Volume 1 — English"
     },
     {
-      "name": "book-2",
-      "bookFile": "book-2.txt",
-      "description": "Second publication"
+      "name": "trilogy-vol1-es",
+      "bookFile": "book-1-es.txt",
+      "funnel": "religious",
+      "language": "es",
+      "description": "Trilogy Volume 1 — Spanish"
     },
     {
-      "name": "book-3",
-      "bookFile": "book-3.txt",
-      "description": "Third publication"
+      "name": "trilogy-vol2-en",
+      "bookFile": "book-2-en.txt",
+      "funnel": "religious",
+      "language": "en",
+      "description": "Trilogy Volume 2 — English"
     },
     {
-      "name": "book-4",
-      "bookFile": "book-4.txt",
-      "description": "Fourth publication"
+      "name": "trilogy-vol2-es",
+      "bookFile": "book-2-es.txt",
+      "funnel": "religious",
+      "language": "es",
+      "description": "Trilogy Volume 2 — Spanish"
+    },
+    {
+      "name": "trilogy-vol3-en",
+      "bookFile": "book-3-en.txt",
+      "funnel": "religious",
+      "language": "en",
+      "description": "Trilogy Volume 3 — English"
+    },
+    {
+      "name": "trilogy-vol3-es",
+      "bookFile": "book-3-es.txt",
+      "funnel": "religious",
+      "language": "es",
+      "description": "Trilogy Volume 3 — Spanish"
+    },
+    {
+      "name": "secular-book4-en",
+      "bookFile": "book-4-en.txt",
+      "funnel": "secular",
+      "language": "en",
+      "description": "Secular Self-Improvement — English"
+    },
+    {
+      "name": "secular-book4-es",
+      "bookFile": "book-4-es.txt",
+      "funnel": "secular",
+      "language": "es",
+      "description": "Secular Self-Improvement — Spanish"
     }
   ]
 }

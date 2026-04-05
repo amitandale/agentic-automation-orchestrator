@@ -1,38 +1,82 @@
 {
   "routines": [
     {
-      "id": "reddit-engagement",
+      "id": "reddit-engagement-religious",
       "agent": "openclaw-browser",
       "task_type": "browser_post",
+      "funnel": "religious",
       "schedule": "0 */3 * * *",
-      "description": "Scan target subreddits and engage in relevant threads",
-      "max_daily_executions": 5,
+      "description": "Scan Torah/spirituality subreddits and engage (Trilogy funnel)",
+      "max_daily_executions": 3,
       "requires_approval": true
     },
     {
-      "id": "twitter-engagement",
+      "id": "reddit-engagement-secular",
       "agent": "openclaw-browser",
       "task_type": "browser_post",
+      "funnel": "secular",
+      "schedule": "30 */3 * * *",
+      "description": "Scan self-improvement/mindfulness subreddits and engage (Book 4 funnel)",
+      "max_daily_executions": 3,
+      "requires_approval": true
+    },
+    {
+      "id": "twitter-engagement-religious",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "funnel": "religious",
       "schedule": "0 */2 * * *",
-      "description": "Post and reply on Twitter/X in target topics",
-      "max_daily_executions": 8,
+      "description": "Post and reply on Twitter/X in Torah/spirituality topics (Trilogy funnel)",
+      "max_daily_executions": 4,
       "requires_approval": true
     },
     {
-      "id": "discord-engagement",
+      "id": "twitter-engagement-secular",
       "agent": "openclaw-browser",
       "task_type": "browser_post",
+      "funnel": "secular",
       "schedule": "30 */2 * * *",
-      "description": "Participate in Discord server conversations",
-      "max_daily_executions": 6,
+      "description": "Post and reply on Twitter/X in mindfulness/self-improvement topics (Book 4 funnel)",
+      "max_daily_executions": 4,
       "requires_approval": true
     },
     {
-      "id": "influencer-scout",
+      "id": "discord-engagement-religious",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "funnel": "religious",
+      "schedule": "0 */4 * * *",
+      "description": "Participate in Torah/Jewish-philosophy Discord servers (Trilogy funnel)",
+      "max_daily_executions": 3,
+      "requires_approval": true
+    },
+    {
+      "id": "discord-engagement-secular",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "funnel": "secular",
+      "schedule": "30 */4 * * *",
+      "description": "Participate in mindfulness/self-improvement Discord servers (Book 4 funnel)",
+      "max_daily_executions": 3,
+      "requires_approval": true
+    },
+    {
+      "id": "influencer-scout-religious",
       "agent": "openclaw-browser",
       "task_type": "browser_scout",
+      "funnel": "religious",
       "schedule": "0 9 * * *",
-      "description": "Daily influencer discovery scan",
+      "description": "Daily influencer discovery for Torah/spirituality niche (Trilogy funnel)",
+      "max_daily_executions": 1,
+      "requires_approval": false
+    },
+    {
+      "id": "influencer-scout-secular",
+      "agent": "openclaw-browser",
+      "task_type": "browser_scout",
+      "funnel": "secular",
+      "schedule": "30 9 * * *",
+      "description": "Daily influencer discovery for self-improvement/consciousness niche (Book 4 funnel)",
       "max_daily_executions": 1,
       "requires_approval": false
     },
@@ -41,7 +85,7 @@
       "agent": "hermes-reasoning",
       "task_type": "influencer_score",
       "schedule": "0 10 * * *",
-      "description": "Score discovered influencers and select DM candidates",
+      "description": "Score discovered influencers from both funnels and select DM candidates",
       "max_daily_executions": 1,
       "requires_approval": false
     },
@@ -50,7 +94,7 @@
       "agent": "openclaw-browser",
       "task_type": "dm_send",
       "schedule": "0 14 * * *",
-      "description": "Send DMs to top 3 scored influencers",
+      "description": "Send DMs to top scored influencers (funnel inherited from scout data)",
       "max_daily_executions": 3,
       "requires_approval": false
     },
@@ -59,7 +103,7 @@
       "agent": "openclaw-browser",
       "task_type": "dm_send",
       "schedule": "0 15 * * *",
-      "description": "Follow up on unanswered DMs (7-day and 14-day)",
+      "description": "Follow up on unanswered DMs (7-day and 14-day, funnel inherited)",
       "max_daily_executions": 5,
       "requires_approval": false
     }

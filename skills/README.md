@@ -1,35 +1,43 @@
 # Skills Directory
 
-Skills are plain-English markdown instruction files that tell agents how to perform specific tasks. Each skill lives in its own subdirectory.
+Skills are markdown instruction files that tell agents exactly how to perform specific tasks. Each agent reads the relevant SKILL.md before executing.
 
-## Structure
+## Dual-Funnel Architecture
 
-```
-skills/
-├── book-voice/          # Author voice guidelines (referenced by all other skills)
-├── reddit-post/         # Reddit thread engagement
-├── twitter-post/        # Twitter/X posting and replies
-├── discord-engage/      # Discord community participation
-├── influencer-scout/    # Browser-based influencer discovery
-└── dm-outreach/         # Direct message outreach flow
-```
+The system operates two parallel marketing funnels:
 
-## How Skills Work
+| Funnel | Books | Audience | Voice File |
+|---|---|---|---|
+| `religious` | 1, 2, 3 (Trilogy) | Torah study, Jewish spirituality, mysticism | `book-voice-religious/SKILL.md` |
+| `secular` | 4 | Self-improvement, consciousness, mindfulness | `book-voice-secular/SKILL.md` |
 
-1. Paperclip schedules a task and assigns it to an agent.
-2. The agent loads the relevant SKILL.md file for the task type.
-3. The agent follows the step-by-step instructions in the SKILL.md.
-4. Anti-ban rules (where present) are injected as behavioral constraints.
+Every task dispatched by Paperclip includes a `funnel` parameter. Skills use this to:
+1. Load the correct voice guidelines
+2. Search the correct topics/hashtags
+3. Filter Qdrant queries to the correct books
+4. Never cross funnels — religious content stays religious, secular stays secular
 
-## Writing New Skills
+## Multilingual Support
 
-1. Create a new directory under `skills/`.
-2. Add a `SKILL.md` with clear, numbered step-by-step instructions.
-3. Optionally add `anti-ban-rules.md` for platform-specific behavioral constraints.
-4. Reference `book-voice/SKILL.md` for voice/tone consistency.
+Agents dynamically detect the language of the target thread/profile and:
+1. Draft content natively in the detected language (never translate)
+2. Filter Qdrant queries by both `funnel` AND `language`
+3. If no content exists in the target language, use English as fallback reference but still draft natively
 
-## Important
+## Available Skills
 
-- Skills should read like instructions for a careful, intelligent assistant.
-- Never include hardcoded credentials in skill files.
-- Platform-specific timing and rate limits belong in `anti-ban-rules.md`, not in the SKILL.md itself.
+| Skill | Agent | Purpose |
+|---|---|---|
+| `book-voice` | — | Router: points to the two funnel-specific voice skills |
+| `book-voice-religious` | Hermes | Voice guidelines for Trilogy (Books 1–3) engagement |
+| `book-voice-secular` | Hermes | Voice guidelines for Book 4 engagement |
+| `reddit-post` | OpenClaw + Hermes | Reddit thread engagement with anti-ban rules |
+| `twitter-post` | OpenClaw + Hermes | Twitter/X posting and replies with anti-ban rules |
+| `discord-engage` | OpenClaw + Hermes | Discord community participation |
+| `influencer-scout` | OpenClaw | Browser-based influencer discovery (funnel-specific search) |
+| `dm-outreach` | OpenClaw + Hermes | Direct message outreach with funnel-specific pitch |
+| `link-generator` | OpenClaw | Tracked link generation via reader app (placeholder) |
+
+## Anti-Ban Rules
+
+Platform-specific anti-ban rules are stored as companion markdown files inside each skill directory (e.g., `reddit-post/anti-ban-rules.md`). These are read by the agents alongside the SKILL.md.
