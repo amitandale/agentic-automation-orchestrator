@@ -1,0 +1,7 @@
+node_modules/
+.env
+books/
+pgdata/
+qdrant_storage/
+SOUL-*.md
+accounts/*.json
