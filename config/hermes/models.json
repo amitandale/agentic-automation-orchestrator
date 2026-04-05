@@ -1,0 +1,31 @@
+{
+  "provider": "openrouter",
+  "api_key_env": "OPENROUTER_API_KEY",
+  "models": {
+    "primary": {
+      "id": "anthropic/claude-sonnet-4-20250514",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "use_for": ["content_draft", "dm_draft"]
+    },
+    "fast": {
+      "id": "anthropic/claude-3-5-haiku-20241022",
+      "max_tokens": 2048,
+      "temperature": 0.5,
+      "use_for": ["influencer_score", "qdrant_query"]
+    },
+    "fallback": {
+      "id": "openai/gpt-4o-mini",
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "use_for": ["content_draft", "dm_draft", "influencer_score", "qdrant_query"]
+    }
+  },
+  "failover": {
+    "enabled": true,
+    "max_retries": 3,
+    "retry_delay_ms": 2000,
+    "fallback_on_429": true,
+    "fallback_on_500": true
+  }
+}

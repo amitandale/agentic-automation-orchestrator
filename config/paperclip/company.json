@@ -1,1 +1,20 @@
-{ "name": "Content Co" }
+{
+  "name": "Content Publishing Co.",
+  "mission": "Build dominant online presence across spiritual, philosophical, and Torah study communities and convert traffic to content sales.",
+  "goals": [
+    "Establish authentic voice in target communities",
+    "Generate 50+ meaningful community interactions per week",
+    "Drive traffic to reading platform via tracked links",
+    "Build partnership network with 20+ influencers in year 1"
+  ],
+  "budgets": {
+    "daily_total_usd": 5.50,
+    "monthly_cap_usd": 165.00,
+    "budget_warning_threshold": 0.80
+  },
+  "governance": {
+    "human_approval_required": ["public_post"],
+    "auto_approved": ["dm_send", "content_draft", "qdrant_query", "browser_scout"],
+    "approval_timeout_hours": 24
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "agents": [
+    {
+      "id": "openclaw-browser",
+      "name": "Browser Agent",
+      "type": "browser",
+      "endpoint": "http://openclaw:18789",
+      "task_types": ["browser_post", "browser_scout", "dm_send", "file_read"],
+      "budget": {
+        "daily_usd": 1.50,
+        "monthly_cap_usd": 45.00
+      },
+      "constraints": {
+        "max_concurrent_tasks": 2,
+        "requires_anti_ban_check": true,
+        "dry_run_env": "DRY_RUN"
+      }
+    },
+    {
+      "id": "hermes-reasoning",
+      "name": "Reasoning Agent",
+      "type": "api",
+      "endpoint": "http://hermes:4000",
+      "task_types": ["content_draft", "influencer_score", "dm_draft", "qdrant_query"],
+      "budget": {
+        "daily_usd": 4.00,
+        "monthly_cap_usd": 120.00
+      },
+      "constraints": {
+        "max_concurrent_tasks": 5,
+        "requires_anti_ban_check": false
+      }
+    }
+  ]
+}

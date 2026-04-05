@@ -1,0 +1,67 @@
+{
+  "routines": [
+    {
+      "id": "reddit-engagement",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "schedule": "0 */3 * * *",
+      "description": "Scan target subreddits and engage in relevant threads",
+      "max_daily_executions": 5,
+      "requires_approval": true
+    },
+    {
+      "id": "twitter-engagement",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "schedule": "0 */2 * * *",
+      "description": "Post and reply on Twitter/X in target topics",
+      "max_daily_executions": 8,
+      "requires_approval": true
+    },
+    {
+      "id": "discord-engagement",
+      "agent": "openclaw-browser",
+      "task_type": "browser_post",
+      "schedule": "30 */2 * * *",
+      "description": "Participate in Discord server conversations",
+      "max_daily_executions": 6,
+      "requires_approval": true
+    },
+    {
+      "id": "influencer-scout",
+      "agent": "openclaw-browser",
+      "task_type": "browser_scout",
+      "schedule": "0 9 * * *",
+      "description": "Daily influencer discovery scan",
+      "max_daily_executions": 1,
+      "requires_approval": false
+    },
+    {
+      "id": "influencer-scoring",
+      "agent": "hermes-reasoning",
+      "task_type": "influencer_score",
+      "schedule": "0 10 * * *",
+      "description": "Score discovered influencers and select DM candidates",
+      "max_daily_executions": 1,
+      "requires_approval": false
+    },
+    {
+      "id": "dm-outreach",
+      "agent": "openclaw-browser",
+      "task_type": "dm_send",
+      "schedule": "0 14 * * *",
+      "description": "Send DMs to top 3 scored influencers",
+      "max_daily_executions": 3,
+      "requires_approval": false
+    },
+    {
+      "id": "dm-followup",
+      "agent": "openclaw-browser",
+      "task_type": "dm_send",
+      "schedule": "0 15 * * *",
+      "description": "Follow up on unanswered DMs (7-day and 14-day)",
+      "max_daily_executions": 5,
+      "requires_approval": false
+    }
+  ]
+}

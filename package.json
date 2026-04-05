@@ -1,0 +1,16 @@
+{
+  "name": "agentic-automation-orchestrator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Orchestration layer for multi-agent content automation",
+  "scripts": {
+    "index-books": "tsx qdrant/index-books.ts",
+    "query": "tsx qdrant/query.ts",
+    "warm-up": "tsx scripts/warm-up-accounts.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
+    "@types/node": "^22.0.0"
+  }
+}

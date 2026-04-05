@@ -1,0 +1,24 @@
+{
+  "collections": [
+    {
+      "name": "book-1",
+      "bookFile": "book-1.txt",
+      "description": "First publication — primary content collection"
+    },
+    {
+      "name": "book-2",
+      "bookFile": "book-2.txt",
+      "description": "Second publication"
+    },
+    {
+      "name": "book-3",
+      "bookFile": "book-3.txt",
+      "description": "Third publication"
+    },
+    {
+      "name": "book-4",
+      "bookFile": "book-4.txt",
+      "description": "Fourth publication"
+    }
+  ]
+}

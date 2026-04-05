@@ -1,4 +1,107 @@
-version: '3.9'
+version: "3.9"
+
 services:
+
+  # =========================================================================
+  # Paperclip — Governance OS
+  # =========================================================================
+  paperclip:
+    image: paperclipai/paperclip:1.4.2
+    container_name: orchestrator-paperclip
+    restart: unless-stopped
+    ports:
+      - "3100:3100"   # API
+      - "3101:3101"   # Dashboard
+    environment:
+      - DATABASE_URL=postgresql://postgres:${DB_PASS}@db:5432/orchestrator
+      - APPROVAL_TIMEOUT_HOURS=${APPROVAL_TIMEOUT_HOURS:-24}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./config/paperclip:/app/company
+    networks:
+      - orchestrator-net
+
+  # =========================================================================
+  # OpenClaw — Browser Automation Agent
+  # =========================================================================
+  openclaw:
+    image: openclaw/openclaw:0.9.7
+    container_name: orchestrator-openclaw
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    environment:
+      - PAPERCLIP_URL=http://paperclip:3100
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - DRY_RUN=${DRY_RUN:-false}
+    volumes:
+      - ./books:/workspace/books:ro
+      - ./skills:/workspace/skills:ro
+      - ./config/openclaw:/workspace/config
+    depends_on:
+      - paperclip
+    networks:
+      - orchestrator-net
+
+  # =========================================================================
+  # Hermes-Agent — Reasoning Brain
+  # =========================================================================
+  hermes:
+    image: nousresearch/hermes-agent:2.1.0
+    container_name: orchestrator-hermes
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      - PAPERCLIP_URL=http://paperclip:3100
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - QDRANT_URL=http://qdrant:6333
+    volumes:
+      - ./config/hermes:/workspace/config:ro
+      - ./config/openclaw/SOUL-public.md:/workspace/soul/SOUL.md:ro
+    depends_on:
+      - paperclip
+      - qdrant
+    networks:
+      - orchestrator-net
+
+  # =========================================================================
+  # Qdrant — Vector Store
+  # =========================================================================
+  qdrant:
+    image: qdrant/qdrant:1.12.1
+    container_name: orchestrator-qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"   # gRPC
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+    networks:
+      - orchestrator-net
+
+  # =========================================================================
+  # Postgres — Paperclip Database
+  # =========================================================================
   db:
-    image: postgres:16
+    image: postgres:16.4-alpine
+    container_name: orchestrator-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=orchestrator
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - orchestrator-net
+
+networks:
+  orchestrator-net:
+    driver: bridge

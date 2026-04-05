@@ -1,7 +1,37 @@
+# Dependencies
 node_modules/
+dist/
+*.tsbuildinfo
+
+# Environment & secrets
 .env
-books/
+.env.local
+.env.production
+
+# Content files (added on server, never committed)
+books/*.txt
+books/*.pdf
+
+# Database volumes
 pgdata/
 qdrant_storage/
-SOUL-*.md
-accounts/*.json
+
+# Persona files (contain private voice/identity data)
+config/openclaw/SOUL-*.md
+
+# Account credentials
+config/openclaw/accounts/*.json
+
+# Backup archives
+backups/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/

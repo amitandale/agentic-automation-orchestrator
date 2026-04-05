@@ -1,0 +1,38 @@
+{
+  "gateway": {
+    "port": 18789,
+    "paperclip_url": "http://paperclip:3100",
+    "dry_run": false
+  },
+  "browser": {
+    "executable": "/usr/bin/chromium-browser",
+    "headless": true,
+    "profile_isolation": true,
+    "profile_dir": "/workspace/profiles",
+    "viewport": { "width": 1920, "height": 1080 },
+    "user_agent_rotation": true,
+    "request_delay_ms": { "min": 800, "max": 3000 }
+  },
+  "channels": {
+    "reddit": {
+      "enabled": true,
+      "account_config": "/workspace/config/accounts/reddit.json",
+      "target_subreddits": []
+    },
+    "twitter": {
+      "enabled": true,
+      "account_config": "/workspace/config/accounts/twitter.json"
+    },
+    "discord": {
+      "enabled": true,
+      "token_env": "OPENCLAW_DISCORD_TOKEN",
+      "guild_allowlist": []
+    },
+    "whatsapp": {
+      "enabled": true,
+      "notification_number_env": "OPENCLAW_WHATSAPP_NUMBER"
+    }
+  },
+  "skills_dir": "/workspace/skills",
+  "books_dir": "/workspace/books"
+}
