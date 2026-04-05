@@ -96,7 +96,7 @@
       "schedule": "0 14 * * *",
       "description": "Send DMs to top scored influencers (funnel inherited from scout data)",
       "max_daily_executions": 3,
-      "requires_approval": false
+      "requires_approval": true
     },
     {
       "id": "dm-followup",
@@ -105,7 +105,7 @@
       "schedule": "0 15 * * *",
       "description": "Follow up on unanswered DMs (7-day and 14-day, funnel inherited)",
       "max_daily_executions": 5,
-      "requires_approval": false
+      "requires_approval": true
     },
     {
       "id": "reactive-scanning",
