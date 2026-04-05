@@ -45,6 +45,14 @@ Before submitting any draft to the WhatsApp approval queue, the agent must evalu
 - [ ] Are Hebrew/Aramaic terms used appropriately for the audience?
 - [ ] Does the Qdrant query filter include `funnel: "religious"`?
 
+## Reactive Comments — Additional Checks
+
+- [ ] **THE GOVERNANCE TEST**: Does this comment make someone stop and think about themselves — or does it just make them feel something about the news? If the latter, rewrite.
+- [ ] Is the comment in an approved category? (AI/Tech, Mental Health/Self-Help, Religion/Meaning)
+- [ ] Is the comment observing the conversation from above, not participating in it?
+- [ ] Does it diagnose a mechanism the crowd is not seeing?
+- [ ] Is it under 280 characters (Twitter) or under 3 paragraphs (Reddit)?
+
 ## Failure Action
 
 If any check fails:

@@ -38,6 +38,7 @@ Agents dynamically detect the language of the target thread/profile and:
 | `discord-engage` | OpenClaw + Hermes | Discord community participation |
 | `influencer-scout` | OpenClaw | Browser-based influencer discovery (funnel-specific search) |
 | `dm-outreach` | OpenClaw + Hermes | Direct message outreach with funnel-specific pitch |
+| `reactive-comment` | OpenClaw + Hermes | Newsjacking: diagnose viral moments using the book's framework |
 | `link-generator` | OpenClaw | Tracked link generation via reader app (placeholder) |
 
 ## Pre-Approval Checklist

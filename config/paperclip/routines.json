@@ -106,6 +106,16 @@
       "description": "Follow up on unanswered DMs (7-day and 14-day, funnel inherited)",
       "max_daily_executions": 5,
       "requires_approval": false
+    },
+    {
+      "id": "reactive-scanning",
+      "agent": "openclaw-browser",
+      "task_type": "browser_scan",
+      "funnel": "secular",
+      "schedule": "0 */4 * * *",
+      "description": "Scan monitored accounts for viral moments in approved categories to newsjack",
+      "max_daily_executions": 3,
+      "requires_approval": true
     }
   ]
 }
